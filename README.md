@@ -46,3 +46,16 @@ information as necessary (e.g. converting prices to numeric values and convertin
 - ~~Move all the Xpaths to a config file.~~ Done Perfectly!
 
 - Finding any remaining hardcoded strings in the script that could be moved in a config file.
+
+Task Title: 2. Regex
+====================
+
+### Task Title: 2. Regex
+### Requirement: write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
+### Bonus: Is there a single regex for all 5 examples ?
+
+The task is focused on using regular expressions (regex) to extract specific information from a string. The goal is to extract the height, width, and depth of an object as float64 integers from a string in the "rawDim" column of a DataFrame.
+
+The DataFrame is read from a CSV file located in the "candidateEvalData" directory within the parent directory of the current working directory. The script starts by importing the os and pandas module, then it uses the os module to get current working directory, then it uses the os.path module to get the parent directory, then it appends the file path to the dim_df_correct.csv file using os.path.join(). Then it reads the file using pandas and prints the dataframe.
+
+The task includes a bonus challenge to see if a single regex can be used to extract the information from all 5 examples. This will test your regex skills and ability to handle different variations of the input string.

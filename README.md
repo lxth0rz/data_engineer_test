@@ -43,6 +43,6 @@ information as necessary (e.g. converting prices to numeric values and convertin
 - Refactoring the `_post_processing` function.
    - Change the post-processing of the fields to be using their types rather than their names.
 
-- ~~Move all the Xpaths to a config file.~~~ Done Perfectly!
+- ~~Move all the Xpaths to a config file.~~ Done Perfectly!
 
-- Finding any remanining hardcoded strings in the script that could be moved in a config file.
+- Finding any remaining hardcoded strings in the script that could be moved in a config file.

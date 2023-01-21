@@ -13,7 +13,7 @@
     7. The url of the image of the painting
     8. Saledate of the painting (e.g. 2016-02-11)
 
-### Task Breakdown
+### Solution Breakdown
 
 To parse the HTML, we will use the `requests` and `lxml` libraries. The `requests` library will be used to send
 an HTTP request to the webpage and retrieve the HTML content. The `lxml` library will then be used to parse the HTML
@@ -46,3 +46,60 @@ information as necessary (e.g. converting prices to numeric values and convertin
 - ~~Move all the Xpaths to a config file.~~ Done Perfectly!
 
 - Finding any remaining hardcoded strings in the script that could be moved in a config file.
+
+# Task 2: Regex
+====================
+
+#### Requirement: write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
+#### Bonus: Is there a single regex for all 5 examples ?
+
+The task is focused on using regular expressions (regex) to extract specific information from a string. The goal is to extract the height, width, and depth of an object as float64 integers from a string in the "rawDim" column of a DataFrame.
+
+The DataFrame is read from a CSV file located in the "candidateEvalData" directory within the parent directory of the current working directory. The script starts by importing the os and pandas module, then it uses the os module to get current working directory, then it uses the os.path module to get the parent directory, then it appends the file path to the dim_df_correct.csv file using os.path.join(). Then it reads the file using pandas and prints the dataframe.
+
+The task includes a bonus challenge to see if a single regex can be used to extract the information from all 5 examples. This will test your regex skills and ability to handle different variations of the input string.
+
+### Solution Breakdown:
+
+Added a regex function to extract height, width, and depth from the 'rawDim' column of a DataFrame. 
+The function uses different regex patterns to match different formats of the rawDim string. The function 
+also converts the extracted values from inches to centimeters if necessary. The script starts by importing 
+the os, re and pandas module, then it uses the os module to get current working directory, then it uses the 
+os.path module to get the parent directory, then it appends the file path to the dim_df_correct.csv file using 
+os.path.join(). Then it reads the file using pandas and prints the dataframe.
+
+Tne next `patterns_dict` is a dictionary that contains different regular expressions (regex) for extracting information from a 
+string. The goal is to use these regex patterns to extract the height, width, and depth of an object as numbers from 
+a string in a DataFrame.
+
+```
+patterns_dict = {'19×52cm': r"(\d+)×(\d+)×*(\d*)\s*(\w{2})",
+                 "50 x 66,4 cm": r"([\d,]+)\sx\s([\d,]+)\s*([\d,]*)\s*(\w{2})",
+                 "168.9 x 274.3 x 3.8 cm (66 1/2 x 108 x 1 1/2 in.)": "([\d\.]+)\sx\s([\d\.]+)\sx\s([\d\.]+)\s*(\w{2})",
+                 "Sheet: 16 1/4 × 12 1/4 in. (41.3 × 31.1 cm) Image: 14 × 9 7/8 in. (35.6 × 25.1 cm)": "(\d+\.\d+)\s×\s(\d+\.\d+)\s×*\s*(\d*\.*\d*)\s*(\w{2})\)$",
+                 "5 by 5in": "(\d+)\sby\s(\d+)\s*(\d*)(\w{2})",}
+```
+                 
+Each key in the dictionary is a string that represents a different format of the information, and the corresponding 
+value is the regex pattern used to extract the information from that format.
+
+The code then uses the function extract_dim() which takes in a string from the DataFrame column rawDim and uses the 
+patterns_dict to select the appropriate regex pattern to use for that string. The function then uses the re.compile() 
+and search() methods to find a match for the regex pattern in the input string and extracts the height, width, and 
+depth as floats using the match.group() method. The extracted values are then passed to the function format_dim() 
+which converts the values to centimeters if the unit of measurement is inches.
+
+### Possible Improvements
+
+- Bonus: Is there a single regex for all 5 examples ?
+  -- My very first trail leads to the next regex
+  ~~`([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×*|x*)\s*([\d\.,]*)(\w{2})|(\d+)\sby\s(\d+)\s*(\d*)(\w{2})`~~
+  --- Only two tweaks remaining is to fix it for the 2nd capturing group for the third string then to capture the last group only for the forth string.
+  --- Then, finally re-write it and try to find more ways to improve it.
+  The next regex works much better for all of them
+ `([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×|x)*\s*([\d\.,]*)\s*(\w{2})\s*|(\d+)\s*by\s*(\d+)\s*([a-z]{2})`
+  - In order for the above regex to work for them all, you need to extract the last group for the forth string `Sheet: 16 1/4 × 12 1/4 in. (41.3 × 31.1 cm) Image: 14 × 9 7/8 in. (35.6 × 25.1 cm)`
+    also despite that the above regex is working on them all in a regex editor, however, in Python if fail to capture the last string
+     
+- Code refactor
+- Moving regex to a config file.

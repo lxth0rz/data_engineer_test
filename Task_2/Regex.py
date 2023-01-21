@@ -17,6 +17,10 @@ file_path = os.path.join(parent_dir, "candidateEvalData", "dim_df_correct.csv")
 
 dim_df = pd.read_csv(file_path)
 
+# This is a dictionary that contains different regular expressions (regex) for extracting information from a string.
+# Each key in the dictionary is a string that represents a # different format of the information, and the corresponding
+# value is the regex pattern used to extract the information from that format. The goal is to use these regex patterns to
+# extract the height, width, and depth of an object as numbers from a string in a DataFrame.
 patterns_dict = {'19×52cm': r"(\d+)×(\d+)×*(\d*)\s*(\w{2})",
                  "50 x 66,4 cm": r"([\d,]+)\sx\s([\d,]+)\s*([\d,]*)\s*(\w{2})",
                  "168.9 x 274.3 x 3.8 cm (66 1/2 x 108 x 1 1/2 in.)": "([\d\.]+)\sx\s([\d\.]+)\sx\s([\d\.]+)\s*(\w{2})",
@@ -24,9 +28,18 @@ patterns_dict = {'19×52cm': r"(\d+)×(\d+)×*(\d*)\s*(\w{2})",
                  "5 by 5in": "(\d+)\sby\s(\d+)\s*(\d*)(\w{2})",}
 
 def inch_to_cm(inch):
+    """
+    Converts inches to centimeters.
+    Takes in a value in inches and returns the equivalent value in centimeters.
+    """
     return float(inch) * 2.54
 
 def format_dim(height, width, depth, metric_unit):
+
+    """
+     Converts the given height, width, and depth from inches to centimeters if the metric_unit is "in"
+     Otherwise, it returns the given values as is [after changing to float and changing the comma to a dot if count]
+     """
 
     if metric_unit == "cm":
         return float(height.replace(",", ".")), \
@@ -39,6 +52,12 @@ def format_dim(height, width, depth, metric_unit):
 
 # extract_dim, one regex for each dim.
 def extract_dim(raw_dim):
+
+    """
+    Extracts the height, width, and depth of an object as float64 integers from a string in the "rawDim" column of a DataFrame.
+    The regex pattern is chosen from the 'patterns_dict' based on the input string.
+    If no match is found, it prints "No match found"
+    """
 
     # Define the regex pattern for 19×52cm
     pattern = re.compile(patterns_dict[raw_dim])

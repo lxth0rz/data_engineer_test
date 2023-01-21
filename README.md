@@ -30,3 +30,12 @@ using appropriate xpath selectors.
 
 Finally, we will use the `pandas` library to create a dataframe with the extracted information, and format the
 information as necessary (e.g. converting prices to numeric values and converting the date string to a `datetime` object).
+
+### Possible Improvements
+
+- There is a chance just data can be extracted directly from an endpoint.
+![image](https://user-images.githubusercontent.com/7511696/213869937-6d676c94-190b-499f-9e15-50916f6e9406.png)
+
+- Regular expressions required further improvments.
+
+- Refactoring the `_extracting_data` function.

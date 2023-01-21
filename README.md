@@ -78,7 +78,8 @@ patterns_dict = {'19×52cm': r"(\d+)×(\d+)×*(\d*)\s*(\w{2})",
                  "50 x 66,4 cm": r"([\d,]+)\sx\s([\d,]+)\s*([\d,]*)\s*(\w{2})",
                  "168.9 x 274.3 x 3.8 cm (66 1/2 x 108 x 1 1/2 in.)": "([\d\.]+)\sx\s([\d\.]+)\sx\s([\d\.]+)\s*(\w{2})",
                  "Sheet: 16 1/4 × 12 1/4 in. (41.3 × 31.1 cm) Image: 14 × 9 7/8 in. (35.6 × 25.1 cm)": "(\d+\.\d+)\s×\s(\d+\.\d+)\s×*\s*(\d*\.*\d*)\s*(\w{2})\)$",
-                 "5 by 5in": "(\d+)\sby\s(\d+)\s*(\d*)(\w{2})",}```
+                 "5 by 5in": "(\d+)\sby\s(\d+)\s*(\d*)(\w{2})",}
+```
                  
 Each key in the dictionary is a string that represents a different format of the information, and the corresponding 
 value is the regex pattern used to extract the information from that format.

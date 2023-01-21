@@ -33,9 +33,16 @@ information as necessary (e.g. converting prices to numeric values and convertin
 
 ### Possible Improvements
 
-- There is a chance just data can be extracted directly from an endpoint.
+- There is a chance that data can be extracted directly from an endpoint. I didn't digg much further.
 ![image](https://user-images.githubusercontent.com/7511696/213869937-6d676c94-190b-499f-9e15-50916f6e9406.png)
 
-- Regular expressions required further improvments.
+- Regular expressions require further improvements to handle more cases.
 
-- Refactoring the `_extracting_data` function.
+- ~~Refactoring the `_extracting_data` function.~~ Done Perfectly!
+
+- Refactoring the `_post_processing` function.
+   - Change the post-processing of the fields to be using their types rather than their names.
+
+- ~~Move all the Xpaths to a config file.~~~ Done Perfectly!
+
+- Finding any remanining hardcoded strings in the script that could be moved in a config file.

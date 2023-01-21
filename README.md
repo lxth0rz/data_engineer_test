@@ -50,7 +50,8 @@ information as necessary (e.g. converting prices to numeric values and convertin
 # Task 2: Regex
 ====================
 
-#### Requirement: write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
+#### Requirements: 
+write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
 #### Bonus: Is there a single regex for all 5 examples ?
 
 The task is focused on using regular expressions (regex) to extract specific information from a string. The goal is to extract the height, width, and depth of an object as float64 integers from a string in the "rawDim" column of a DataFrame.
@@ -103,3 +104,14 @@ which converts the values to centimeters if the unit of measurement is inches.
      
 - Code refactor
 - Moving regex to a config file.
+
+# Task 3: Web crawler
+====================
+
+### Requirements : 
+This task involves creating a Scrapy spider to scrape information about artworks available for sale on 
+the website https://www.bearspace.co.uk/purchase. The spider will navigate to the individual detail pages of each artwork, 
+where information such as the title, media, dimensions, and price will be scraped. The collected information will be 
+returned in a dataframe with the following columns: "url", "title", "media", "height_cm", "width_cm", and "price_gbp". 
+The dataframe will have a shape of (n,6), where n is the total number of works available for purchase on the website. 
+The spider will use Scrapy, a Python framework for web scraping, to extract the data and return it in a structured format.

@@ -27,7 +27,7 @@ def _request_local_webpage(page_local_path):
 
     return tree
 
-def _post_processing(field, field_type="COCO"):
+def _post_processing(field, field_type="None"):
     #  removes unnecessary spaces, new line, carriage return and puts them together in one string
     #  Also, here we can add more initial data cleaning rules.
     field = ''.join([x.strip() for x in field])
@@ -41,8 +41,8 @@ def _post_processing(field, field_type="COCO"):
 
     elif field_type == "currency":
         field = re.sub(r'GBP\s|,|USD\s', ' ', field)
-    elif field_type == "estimate":
 
+    elif field_type == "estimate":
         # the following expressions should be also improved.
         field = re.sub(r'GBP\s|USD\s|\(|\)', '', field)
         field = re.sub(r',', ' ', field)

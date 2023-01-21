@@ -93,9 +93,13 @@ which converts the values to centimeters if the unit of measurement is inches.
 
 - Bonus: Is there a single regex for all 5 examples ?
   -- My very first trail leads to the next regex
- `([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×*|x*)\s*([\d\.,]*)(\w{2})|(\d+)\sby\s(\d+)\s*(\d*)(\w{2})`
+  ~~`([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×*|x*)\s*([\d\.,]*)(\w{2})|(\d+)\sby\s(\d+)\s*(\d*)(\w{2})`~~
   --- Only two tweaks remaining is to fix it for the 2nd capturing group for the third string then to capture the last group only for the forth string.
   --- Then, finally re-write it and try to find more ways to improve it.
-
+  The next regex works much better for all of them
+ `([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×|x)*\s*([\d\.,]*)\s*(\w{2})\s*|(\d+)\s*by\s*(\d+)\s*([a-z]{2})`
+  - In order for the above regex to work for them all, you need to extract the last group for the forth string `Sheet: 16 1/4 × 12 1/4 in. (41.3 × 31.1 cm) Image: 14 × 9 7/8 in. (35.6 × 25.1 cm)`
+    also despite that the above regex is working on them all in a regex editor, however, in Python if fail to capture the last string
+     
 - Code refactor
 - Moving regex to a config file.

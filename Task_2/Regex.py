@@ -61,11 +61,10 @@ def extract_dim(raw_dim):
 
     # Define the regex pattern for 19×52cm
     pattern = re.compile(patterns_dict[raw_dim])
-    
-    # still working on a single regex for all.
-    #single_pattern_for_all_trails = re.compile('([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×*|x*)\s*([\d\.,]*)(\w{2})|(\d+)\sby\s(\d+)\s*(\d*)(\w{2})')
 
-   # raw_dim = "19×52×51cm"
+    # still working on a single regex for all.
+    # pattern = re.compile(r'([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×|x)*\s*([\d\.,]*)\s*(\w{2})\s*|(\d+)\s*by\s*(\d+)([a-z]{2})')
+
     # Use the search method to find the match
     match = pattern.search(raw_dim)
 

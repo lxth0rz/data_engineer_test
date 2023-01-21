@@ -47,10 +47,9 @@ information as necessary (e.g. converting prices to numeric values and convertin
 
 - Finding any remaining hardcoded strings in the script that could be moved in a config file.
 
-Task Title: 2: Regex
+# Task 2: Regex
 ====================
 
-### Task Title: 2: Regex
 #### Requirement: write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
 #### Bonus: Is there a single regex for all 5 examples ?
 
@@ -93,5 +92,10 @@ which converts the values to centimeters if the unit of measurement is inches.
 ### Possible Improvements
 
 - Bonus: Is there a single regex for all 5 examples ?
+  -- My very first trail leads to the next regex
+ `([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×*|x*)\s*([\d\.,]*)(\w{2})|(\d+)\sby\s(\d+)\s*(\d*)(\w{2})`
+  --- Only two tweaks remaining is to fix it for the 2nd capturing group for the third string then to capture the last group only for the forth string.
+  --- Then, finally re-write it and try to find more ways to improve it.
+
 - Code refactor
 - Moving regex to a config file.

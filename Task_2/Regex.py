@@ -41,11 +41,11 @@ def format_dim(height, width, depth, metric_unit):
      Otherwise, it returns the given values as is [after changing to float and changing the comma to a dot if count]
      """
 
-    if metric_unit == "cm":
+    if metric_unit.lower() == "cm":
         return float(height.replace(",", ".")), \
                float(width.replace(",", ".")), \
                float(depth.replace(",", ".")) if depth != "NaN" else depth
-    elif metric_unit == "in":
+    elif metric_unit.lower() == "in":
         return inch_to_cm(height.replace(",", ".")), \
                inch_to_cm(width.replace(",", ".")), \
                inch_to_cm(float(depth.replace(",", "."))) if depth != "NaN" else depth
@@ -61,6 +61,9 @@ def extract_dim(raw_dim):
 
     # Define the regex pattern for 19×52cm
     pattern = re.compile(patterns_dict[raw_dim])
+    
+    # still working on a single regex for all.
+    #single_pattern_for_all_trails = re.compile('([\d\.,]+)\s*(?:×|x)\s*([\d\.,]+)\s*(?:×*|x*)\s*([\d\.,]*)(\w{2})|(\d+)\sby\s(\d+)\s*(\d*)(\w{2})')
 
    # raw_dim = "19×52×51cm"
     # Use the search method to find the match
@@ -68,10 +71,14 @@ def extract_dim(raw_dim):
 
     # Extract the values from the match object
     if match:
-        height, width, depth = format_dim(height= match.group(1),
-                                          width= match.group(2),
-                                          depth = match.group(3) if match.group(3) != '' else 'NaN',
-                                          metric_unit = match.group(4).lower())
+        height = match.group(1)
+        width = match.group(2)
+        depth = match.group(3)
+        metric_unit = match.group(4)
+        height, width, depth = format_dim(height= height,
+                                          width= width,
+                                          depth = depth if depth != '' else 'NaN',
+                                          metric_unit = metric_unit)
 
     else:
         print("No match found")

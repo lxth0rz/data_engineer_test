@@ -189,5 +189,11 @@ It Complex regex expression used to match dimensions and media, for ex: -but not
 - Full code refactor.
 - Write Tests
 
-# Task 4: Web crawler
+### Other possible ways to extract the data.
+
+I am familiar with this information from the beginning, and although this is usually the first thing I would try to uncover, I don't think that is what is being asked for in this task. I am referring to the inline-json objects within the page source. There is one for the overview page and another one on the details page. Both of these objects will make writing the spider very easy, also inline-json are less likely to change in near future unlike DOM and the XPaths.
+
+![image](https://user-images.githubusercontent.com/7511696/213921340-c245108e-d6e3-49a5-83db-3dca334552b9.png)
+
+# Task 4: Data
 ====================

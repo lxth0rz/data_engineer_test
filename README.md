@@ -47,10 +47,13 @@ information as necessary (e.g. converting prices to numeric values and convertin
 
 - Finding any remaining hardcoded strings in the script that could be moved in a config file.
 
+- Write Tests
+
 # Task 2: Regex
 ====================
 
-#### Requirement: write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
+#### Requirements: 
+write a regex to process the string in rawDim to extract the height, width and the depth (as float64 integers).
 #### Bonus: Is there a single regex for all 5 examples ?
 
 The task is focused on using regular expressions (regex) to extract specific information from a string. The goal is to extract the height, width, and depth of an object as float64 integers from a string in the "rawDim" column of a DataFrame.
@@ -103,3 +106,94 @@ which converts the values to centimeters if the unit of measurement is inches.
      
 - Code refactor
 - Moving regex to a config file.
+- Write Tests
+- 
+# Task 3: Web crawler
+====================
+
+### Requirements : 
+This task involves creating a Scrapy spider to scrape information about artworks available for sale on 
+the website https://www.bearspace.co.uk/purchase. The spider will navigate to the individual detail pages of each artwork, 
+where information such as the title, media, dimensions, and price will be scraped. The collected information will be 
+returned in a dataframe with the following columns: "url", "title", "media", "height_cm", "width_cm", and "price_gbp". 
+The dataframe will have a shape of (n,6), where n is the total number of works available for purchase on the website. 
+The spider will use Scrapy, a Python framework for web scraping, to extract the data and return it in a structured format.
+
+
+
+### Solution Breakdown
+
+This script is a Scrapy spider that scrapes information from the website "[https://www.bearspace.co.uk](https://www.bearspace.co.uk/)" and stores the information in a dataframe. The spider is named "bearspace" and starts by visiting the website's "purchase" page. The spider then extracts all the URLs of the artworks available on the page and requests each of these URLs one by one.
+
+The spider is designed to scrape the following information for each artwork:
+
+-   URL of the artwork
+-   Title of the artwork
+-   Media of the artwork
+-   Height of the artwork in cm
+-   Width of the artwork in cm
+-   Price of the artwork in GBP
+
+The spider uses the following steps to scrape the information:
+
+1.  Initialize an empty dataframe with the desired columns.
+2.  Visit the starting URL (<https://www.bearspace.co.uk/purchase>)
+3.  Extract all the URLs of the artworks available on the page using an xpath selector.
+4.  Request each of these URLs one by one
+5.  Extract the information of the artwork from the HTML of the page using xpath selectors and regular expressions
+6.  Store the information in a dataframe
+7.  Check if there is a load more button on the page and if yes, extract the next page number from the URL
+8.  Visit the next page
+9.  Repeat the process until the load more button is not available
+10. Once all the pages have been visited, the dataframe will contain all the scraped information
+
+The script uses the following libraries:
+
+-   re (Python's regular expression library)
+-   scrapy (a Python framework for creating scrapers)
+-   itertools (Python's standard library for working with iterators)
+-   pandas (a Python library for working
+
+More About ItemLoader:
+
+Scrapy ItemLoader is a powerful tool that makes it easy to extract and process data from web pages, and it is widely used in web scraping projects.
+Some benefits of using ItemLoader include:
+- Simplified item population: ItemLoader allows you to specify field-specific loaders, which can handle different types of data, such as text, numbers, and URLs. This makes it easy to extract and clean data without having to write custom code.
+- Reusability: ItemLoader can be reused across multiple spiders, allowing you to define your item processing logic in one place and reuse it throughout your project.
+- Modularity: ItemLoader allows you to define custom input and output processors for each field, which can be used to clean, validate or modify the data as it is loaded into the item.
+- Extensibility: ItemLoader is extensible, you can define custom loaders and processors for your specific needs.
+- Auto-populating fields: ItemLoader automatically populates fields that are defined in the item.
+- Flexible input: ItemLoader can handle data from multiple sources, such as response objects, lists, or dictionaries, making it easy to extract data from different types of web pages.
+
+Explain the regex expression used to match dimensions and media:
+
+`height\s*(\d+)cm\s*x\s*width\s*(\d+)cm|([WHwhcmCMs\d\.]{1,6})\s*(?:x|X)\s*([WHwhcmCMs\d\.]{1,6})|(\d{2,3})\s*cm.*?diam`
+
+It Complex regex expression used to match dimensions and media, for ex: -but not limited to-
+'99x99 cm'
+'100cm x 80cm'
+'38x32cm'
+'height 70cm x width 100cm'
+'92X45 CM'
+'58W x 85.5Hcm'
+'30cm  diam '
+
+### Possible Improvements
+
+- Improve how the spider matches width, height and media, may be using an NLTK similarity check.
+- Move Xpaths to a config file or Settings.py
+- Adding a config/mode to test only one artwork details URL.
+- Adding a config/mode to test only one overview page URL.
+- Adding more advanced data cleaning in the post-processing.
+- Adding a ref-url of the over-viewpage URL that we extracted the current details url from *helps in further debugging in the future*
+- Full code refactor.
+- Write Tests
+
+### Other possible ways to extract the data.
+
+I am familiar with this information from the beginning, and although this is usually the first thing I would try to uncover, I don't think that is what is being asked for in this task. I am referring to the inline-json objects within the page source. There is one for the overview page and another one on the details page. Both of these objects will make writing the spider very easy, also inline-json are less likely to change in near future unlike DOM and the XPaths.
+
+![image](https://user-images.githubusercontent.com/7511696/213921340-c245108e-d6e3-49a5-83db-3dca334552b9.png)
+
+# Task 4: Data
+====================

@@ -47,6 +47,8 @@ information as necessary (e.g. converting prices to numeric values and convertin
 
 - Finding any remaining hardcoded strings in the script that could be moved in a config file.
 
+- Write Tests
+
 # Task 2: Regex
 ====================
 
@@ -104,7 +106,8 @@ which converts the values to centimeters if the unit of measurement is inches.
      
 - Code refactor
 - Moving regex to a config file.
-
+- Write Tests
+- 
 # Task 3: Web crawler
 ====================
 
@@ -115,3 +118,12 @@ where information such as the title, media, dimensions, and price will be scrape
 returned in a dataframe with the following columns: "url", "title", "media", "height_cm", "width_cm", and "price_gbp". 
 The dataframe will have a shape of (n,6), where n is the total number of works available for purchase on the website. 
 The spider will use Scrapy, a Python framework for web scraping, to extract the data and return it in a structured format.
+
+### Possible Improvements
+- Improve how the spider extracts width, height and media, may be using  the Jaccard similarity using NLTK similarity check
+- Move Xpath to a config file or Settings.py
+- Adding a config/mode to test only one artwork details URL.
+- Adding a config/mode to test only one overview page URL.
+- Adding more advanced data cleaning in the post processing.
+- Write Tests
+- https://www.bearspace.co.uk/product-page/portal-8-by-jane-ward DIAM check

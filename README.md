@@ -123,34 +123,71 @@ The spider will use Scrapy, a Python framework for web scraping, to extract the 
 
 ### Solution Breakdown
 
-        # Scrapy ItemLoader is a powerful tool that makes it easy to extract and process data from web pages, and it is widely used in web scraping projects.
-        # Some benefits of using ItemLoader include:
-        # Simplified item population: ItemLoader allows you to specify field-specific loaders, which can handle different types of data, such as text, numbers, and URLs. This makes it easy to extract and clean data without having to write custom code.
-        # Reusability: ItemLoader can be reused across multiple spiders, allowing you to define your item processing logic in one place and reuse it throughout your project.
-        # Modularity: ItemLoader allows you to define custom input and output processors for each field, which can be used to clean, validate or modify the data as it is loaded into the item.
-        # Extensibility: ItemLoader is extensible, you can define custom loaders and processors for your specific needs.
-        # Auto-populating fields: ItemLoader automatically populates fields that are defined in the item.
-        # Flexible input: ItemLoader can handle data from multiple sources, such as response objects, lists, or dictionaries, making it easy to extract data from different types of web pages.
+This script is a Scrapy spider that scrapes information from the website "[https://www.bearspace.co.uk](https://www.bearspace.co.uk/)" and stores the information in a dataframe. The spider is named "bearspace" and starts by visiting the website's "purchase" page. The spider then extracts all the URLs of the artworks available on the page and requests each of these URLs one by one.
 
-what is this regex capture
+The spider is designed to scrape the following information for each artwork:
+
+-   URL of the artwork
+-   Title of the artwork
+-   Media of the artwork
+-   Height of the artwork in cm
+-   Width of the artwork in cm
+-   Price of the artwork in GBP
+
+The spider uses the following steps to scrape the information:
+
+1.  Initialize an empty dataframe with the desired columns.
+2.  Visit the starting URL (<https://www.bearspace.co.uk/purchase>)
+3.  Extract all the URLs of the artworks available on the page using an xpath selector.
+4.  Request each of these URLs one by one
+5.  Extract the information of the artwork from the HTML of the page using xpath selectors and regular expressions
+6.  Store the information in a dataframe
+7.  Check if there is a load more button on the page and if yes, extract the next page number from the URL
+8.  Visit the next page
+9.  Repeat the process until the load more button is not available
+10. Once all the pages have been visited, the dataframe will contain all the scraped information
+
+The script uses the following libraries:
+
+-   re (Python's regular expression library)
+-   scrapy (a Python framework for creating scrapers)
+-   itertools (Python's standard library for working with iterators)
+-   pandas (a Python library for working
+
+More About ItemLoader:
+
+Scrapy ItemLoader is a powerful tool that makes it easy to extract and process data from web pages, and it is widely used in web scraping projects.
+Some benefits of using ItemLoader include:
+- Simplified item population: ItemLoader allows you to specify field-specific loaders, which can handle different types of data, such as text, numbers, and URLs. This makes it easy to extract and clean data without having to write custom code.
+- Reusability: ItemLoader can be reused across multiple spiders, allowing you to define your item processing logic in one place and reuse it throughout your project.
+- Modularity: ItemLoader allows you to define custom input and output processors for each field, which can be used to clean, validate or modify the data as it is loaded into the item.
+- Extensibility: ItemLoader is extensible, you can define custom loaders and processors for your specific needs.
+- Auto-populating fields: ItemLoader automatically populates fields that are defined in the item.
+- Flexible input: ItemLoader can handle data from multiple sources, such as response objects, lists, or dictionaries, making it easy to extract data from different types of web pages.
+
+Explain the regex expression used to match dimensions and media:
+
 `height\s*(\d+)cm\s*x\s*width\s*(\d+)cm|([WHwhcmCMs\d\.]{1,6})\s*(?:x|X)\s*([WHwhcmCMs\d\.]{1,6})|(\d{2,3})\s*cm.*?diam`
-            # Complex regex expression used to match dimensions and media, for ex: -but not limited to-
-            # '99x99 cm'
-            # '100cm x 80cm'
-            # '38x32cm'
-            # 'height 70cm x width 100cm'
-            # '92X45 CM'
-            # '58W x 85.5Hcm'
-            # '30cm  diam '
+
+It Complex regex expression used to match dimensions and media, for ex: -but not limited to-
+'99x99 cm'
+'100cm x 80cm'
+'38x32cm'
+'height 70cm x width 100cm'
+'92X45 CM'
+'58W x 85.5Hcm'
+'30cm  diam '
 
 ### Possible Improvements
 
-@@@ list all different cases of width and height
-- Improve how the spider extracts width, height and media, may be using  the Jaccard similarity using NLTK similarity check
-- Move Xpath to a config file or Settings.py
+- Improve how the spider matches width, height and media, may be using an NLTK similarity check.
+- Move Xpaths to a config file or Settings.py
 - Adding a config/mode to test only one artwork details URL.
 - Adding a config/mode to test only one overview page URL.
-- Adding more advanced data cleaning in the post processing.
-- Adding a ref-url of the overviwepage URL that we extracted the current deatils url from *helps in further debugging in the future*
+- Adding more advanced data cleaning in the post-processing.
+- Adding a ref-url of the over-viewpage URL that we extracted the current details url from *helps in further debugging in the future*
+- Full code refactor.
 - Write Tests
-- https://www.bearspace.co.uk/product-page/portal-8-by-jane-ward DIAM check
+
+# Task 4: Web crawler
+====================

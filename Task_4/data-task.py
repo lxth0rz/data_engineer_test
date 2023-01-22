@@ -14,8 +14,9 @@ def main():
     weather = pd.read_csv(os.path.join(parent_dir, "candidateEvalData", "weather.csv"))
     airlines = pd.read_csv(os.path.join(parent_dir, "candidateEvalData", "airlines.csv"))
 
-    # 1. Add full airline name to the flights dataframe and show the arr_time, origin, dest and the name of the airline.
-    flights_with_airline = pd.merge(flights, airlines, on='carrier') #inner join
+    # 1. Add full airline name to the flights dataframe
+    flights_with_airline = pd.merge(flights, airlines, on='carrier') # inner join using carrier column.
+    # and show the arr_time, origin, dest and the name of the airline.
     flights_with_airline = flights_with_airline[['arr_time', 'origin', 'dest', 'name']]
 
     # 2. Filter resulting data.frame to include only flights containing the word JetBlue
@@ -25,7 +26,8 @@ def main():
     flights_by_origin = flights_jetblue.groupby('origin').size().sort_values(ascending=True).reset_index(name='counts')
 
     # 4. Filter resulting data.frame to return only origins with more than 100 flights.
-    flights_by_origin = flights_by_origin[flights_by_origin['counts'] > 100].to_csv('output_file_name7.csv', index=False)
+    flights_by_origin_more_than_100 = flights_by_origin[flights_by_origin['counts'] > 100]
 
+    flights.to_sql()
 if __name__ == '__main__':
     main()

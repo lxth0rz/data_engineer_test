@@ -119,11 +119,38 @@ returned in a dataframe with the following columns: "url", "title", "media", "he
 The dataframe will have a shape of (n,6), where n is the total number of works available for purchase on the website. 
 The spider will use Scrapy, a Python framework for web scraping, to extract the data and return it in a structured format.
 
+
+
+### Solution Breakdown
+
+        # Scrapy ItemLoader is a powerful tool that makes it easy to extract and process data from web pages, and it is widely used in web scraping projects.
+        # Some benefits of using ItemLoader include:
+        # Simplified item population: ItemLoader allows you to specify field-specific loaders, which can handle different types of data, such as text, numbers, and URLs. This makes it easy to extract and clean data without having to write custom code.
+        # Reusability: ItemLoader can be reused across multiple spiders, allowing you to define your item processing logic in one place and reuse it throughout your project.
+        # Modularity: ItemLoader allows you to define custom input and output processors for each field, which can be used to clean, validate or modify the data as it is loaded into the item.
+        # Extensibility: ItemLoader is extensible, you can define custom loaders and processors for your specific needs.
+        # Auto-populating fields: ItemLoader automatically populates fields that are defined in the item.
+        # Flexible input: ItemLoader can handle data from multiple sources, such as response objects, lists, or dictionaries, making it easy to extract data from different types of web pages.
+
+what is this regex capture
+`height\s*(\d+)cm\s*x\s*width\s*(\d+)cm|([WHwhcmCMs\d\.]{1,6})\s*(?:x|X)\s*([WHwhcmCMs\d\.]{1,6})|(\d{2,3})\s*cm.*?diam`
+            # Complex regex expression used to match dimensions and media, for ex: -but not limited to-
+            # '99x99 cm'
+            # '100cm x 80cm'
+            # '38x32cm'
+            # 'height 70cm x width 100cm'
+            # '92X45 CM'
+            # '58W x 85.5Hcm'
+            # '30cm  diam '
+
 ### Possible Improvements
+
+@@@ list all different cases of width and height
 - Improve how the spider extracts width, height and media, may be using  the Jaccard similarity using NLTK similarity check
 - Move Xpath to a config file or Settings.py
 - Adding a config/mode to test only one artwork details URL.
 - Adding a config/mode to test only one overview page URL.
 - Adding more advanced data cleaning in the post processing.
+- Adding a ref-url of the overviwepage URL that we extracted the current deatils url from *helps in further debugging in the future*
 - Write Tests
 - https://www.bearspace.co.uk/product-page/portal-8-by-jane-ward DIAM check

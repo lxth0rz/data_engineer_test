@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'bearspace.spiders'
 
 #  LOG_LEVEL setting controls the level of logging that will be output to the console while the spider is running.
 #  Setting LOG_LEVEL to 'DEBUG' will enable the highest level of logging, which includes all messages including debugging information.
-LOG_LEVEL = 'DEBUG'
+LOG_LEVEL = 'INFO'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'bearspace (+http://www.yourdomain.com)'

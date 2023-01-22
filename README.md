@@ -197,3 +197,24 @@ I am familiar with this information from the beginning, and although this is usu
 
 # Task 4: Data
 ====================
+
+Joining Tables in SQL
+---------------------
+
+When working with databases, it's often necessary to combine data from multiple tables. One way to do this is by using a join. There are several types of joins, each with their own use case.
+
+### Inner Join
+
+An inner join is a way to combine data from two tables based on a common column or set of columns. It only returns the rows where there is a match in both tables being joined. This is useful when you want to filter the data to only include the rows that have a match in both tables.
+
+### Left Join
+
+A left join is a way to combine data from two tables, where all the rows from the left table are included, and any matching rows from the right table are included. If there is no match, the right side will contain null values. This is useful when you want to keep all the data from the left table and only include the matching data from the right table.
+
+### Right Join
+
+A right join is similar to a left join, but it returns all rows from the right table and any matching rows from the left table. If there is no match, the left side will contain null values.
+
+### Full Join
+
+A full join returns all rows from both tables, and any matching rows will be combined into a single row. If there is no match, the non-matching side will contain null values. This type of join is useful when you want to include all data from both tables, even if there are no matches.

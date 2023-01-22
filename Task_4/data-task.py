@@ -28,6 +28,5 @@ def main():
     # 4. Filter resulting data.frame to return only origins with more than 100 flights.
     flights_by_origin_more_than_100 = flights_by_origin[flights_by_origin['counts'] > 100]
 
-    flights.to_sql()
 if __name__ == '__main__':
     main()
